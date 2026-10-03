@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#182332">
+  <meta name="description" content="Give your next moment a name, set the clock, and let the signal carry you there.">
+  <title>Neon Countdown</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+  <div class="bubble-field" aria-hidden="true">
+    <span class="bubble"></span><span class="bubble"></span><span class="bubble"></span><span class="bubble"></span>
+    <span class="bubble"></span><span class="bubble"></span><span class="bubble"></span><span class="bubble"></span>
+    <span class="bubble"></span><span class="bubble"></span><span class="bubble"></span><span class="bubble"></span>
+    <span class="bubble"></span><span class="bubble"></span><span class="bubble"></span><span class="bubble"></span>
+  </div>
+
+  <main class="app-shell">
+    <header class="page-heading">
+      <p class="overline">A moment, made yours</p>
+      <h1>Neon Countdown</h1>
+      <p class="tagline">Give your next moment a name, set the clock, and let the signal carry you there.</p>
+    </header>
+
+    <section id="setup-screen" class="glass-card setup-card" aria-labelledby="setup-title">
+      <h2 id="setup-title" class="section-heading">Set your countdown</h2>
+      <form id="countdown-form" novalidate>
+        <label class="field-label" for="timer-title">Countdown title</label>
+        <input id="timer-title" name="title" type="text" maxlength="60" placeholder="Game Night" autocomplete="off">
+
+        <fieldset class="duration-fieldset">
+          <legend class="field-label">Duration</legend>
+          <div class="duration-grid">
+            <label class="duration-field" for="duration-days"><span>Days</span><input id="duration-days" name="days" type="number" min="0" max="999" step="1" value="0" inputmode="numeric"></label>
+            <label class="duration-field" for="duration-hours"><span>Hours</span><input id="duration-hours" name="hours" type="number" min="0" max="23" step="1" value="0" inputmode="numeric"></label>
+            <label class="duration-field" for="duration-minutes"><span>Minutes</span><input id="duration-minutes" name="minutes" type="number" min="0" max="59" step="1" value="5" inputmode="numeric"></label>
+            <label class="duration-field" for="duration-seconds"><span>Seconds</span><input id="duration-seconds" name="seconds" type="number" min="0" max="59" step="1" value="0" inputmode="numeric"></label>
+          </div>
+        </fieldset>
+
+        <div class="sound-panel">
+          <label class="field-label" for="alert-sound">Alert sound</label>
+          <select id="alert-sound" name="sound">
+            <option value="neon-beeps">Neon Beeps</option>
+            <option value="synth-chime">Synth Chime</option>
+            <option value="pulse-siren">Pulse Siren</option>
+            <option value="silent">Silent</option>
+          </select>
+          <div class="upload-row">
+            <label class="upload-button" for="audio-upload">Upload your own track</label>
+            <input id="audio-upload" class="visually-hidden" type="file" accept="audio/*">
+            <span id="upload-name" class="file-name" aria-live="polite">No track selected</span>
+          </div>
+          <div class="volume-row">
+            <label class="field-label" for="volume">Volume</label>
+            <input id="volume" type="range" min="0" max="100" value="55">
+            <output id="volume-value" for="volume">55%</output>
+            <button id="preview-sound" class="small-button" type="button">Preview</button>
+          </div>
+        </div>
+
+        <p id="form-error" class="form-error" role="alert" aria-live="polite"></p>
+        <button class="primary-button" type="submit">Start countdown <span aria-hidden="true">→</span></button>
+      </form>
+    </section>
+
+    <section id="timer-screen" class="glass-card timer-card" aria-labelledby="countdown-title" hidden>
+      <p class="overline">The moment is on its way</p>
+      <h2 id="countdown-title" class="countdown-title"></h2>
+      <div class="digit-grid" role="timer" aria-live="off">
+        <div class="digit-box"><span id="days-value" class="digit-value">00</span><span class="digit-label">Days</span></div>
+        <div class="digit-box"><span id="hours-value" class="digit-value">00</span><span class="digit-label">Hours</span></div>
+        <div class="digit-box"><span id="minutes-value" class="digit-value">00</span><span class="digit-label">Minutes</span></div>
+        <div class="digit-box"><span id="seconds-value" class="digit-value">00</span><span class="digit-label">Seconds</span></div>
+      </div>
+      <div class="progress-section">
+        <div class="progress-caption"><span>Time remaining</span><span id="remaining-label">00:05</span></div>
+        <div id="timer-progress-track" class="progress-track" role="progressbar" aria-label="Countdown time remaining" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100">
+          <div id="timer-progress" class="progress-fill"></div>
+        </div>
+      </div>
+      <p id="timer-status" class="timer-status" aria-live="polite">Counting down</p>
+      <div class="timer-actions">
+        <button id="pause-resume" class="primary-button" type="button">Pause</button>
+        <button id="reset-timer" class="secondary-button" type="button">Reset</button>
+        <button id="stop-alert" class="secondary-button stop-alert-button" type="button" hidden>Stop alert</button>
+      </div>
+    </section>
+
+    <footer class="page-footer">A softer way to look forward.</footer>
+  </main>
+</body>
+</html>

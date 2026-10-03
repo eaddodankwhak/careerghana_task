@@ -1,0 +1,12 @@
+{
+  "name": "neon-countdown",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A soft-glow countdown timer with generated alerts and saved custom audio.",
+  "scripts": {
+    "start": "live-server --port=3000 --watch=assets,css,js,index.html"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}

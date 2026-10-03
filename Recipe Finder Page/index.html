@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b514d">
+  <title>Pantry Pick Ghana | Ghanaian recipes for your meal</title>
+  <meta name="description" content="Find Ghanaian food and drinks for breakfast, lunch, or supper using what is already in your kitchen.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="recipes.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Pantry Pick Ghana home">
+      <span class="brand-mark" aria-hidden="true">P</span>
+      <span>Pantry Pick <span class="brand-country">Ghana</span></span>
+    </a>
+    <span class="header-note">A little less waste. A lot more dinner.</span>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <p class="eyebrow">GHANAIAN FOOD, MADE YOUR WAY</p>
+      <h1 id="hero-title">Ghanaian recipes for<br class="desktop-break"> the meal you are cooking<span class="title-period">.</span></h1>
+
+      <fieldset class="meal-picker">
+        <legend>Which meal are you preparing?</legend>
+        <div class="meal-options" role="group" aria-label="Choose a meal">
+          <button type="button" class="meal-button" data-meal="breakfast" aria-pressed="false">Breakfast</button>
+          <button type="button" class="meal-button" data-meal="lunch" aria-pressed="false">Lunch</button>
+          <button type="button" class="meal-button" data-meal="supper" aria-pressed="false">Supper</button>
+          <button type="button" class="meal-button is-selected" data-meal="all" aria-pressed="true">Show all</button>
+        </div>
+      </fieldset>
+      <p class="hero-copy">Add what’s in your kitchen and find something good to cook.</p>
+
+      <form class="ingredient-form" id="ingredient-form">
+        <label class="visually-hidden" for="ingredient-input">Add an ingredient you have</label>
+        <span class="input-icon" aria-hidden="true">+</span>
+        <input id="ingredient-input" type="text" autocomplete="off" placeholder="Try yam, millet, okro…" aria-label="Add an ingredient and press Enter">
+        <button type="submit">Add ingredient</button>
+      </form>
+      <div class="chip-list" id="ingredient-chips" aria-label="Ingredients you have" aria-live="polite"></div>
+      <p class="ingredient-hint">Press Enter to add each ingredient</p>
+    </section>
+
+    <section class="finder" aria-label="Find a recipe">
+      <div class="finder-topline">
+        <div>
+          <p class="eyebrow">THE RECIPE SHELF</p>
+          <h2>Find your next favorite</h2>
+        </div>
+        <label class="saved-toggle">
+          <input id="saved-only" type="checkbox">
+          <span class="toggle-track" aria-hidden="true"><span></span></span>
+          <span>Saved only</span>
+        </label>
+      </div>
+
+      <div class="control-row">
+        <label class="search-box">
+          <span aria-hidden="true" class="search-icon"></span>
+          <span class="visually-hidden">Search recipes by name, region, or ingredient</span>
+          <input id="text-search" type="search" placeholder="Search recipes, regions, ingredients…" aria-label="Search recipes by name, region, or ingredient">
+        </label>
+        <label class="select-control">
+          <span>Skill</span>
+          <select id="level-filter" aria-label="Filter by skill level">
+            <option value="all">Any level</option>
+            <option value="1">Beginner</option>
+            <option value="2">Home cook</option>
+            <option value="3">Chef</option>
+          </select>
+        </label>
+        <label class="select-control">
+          <span>Diet</span>
+          <select id="diet-filter" aria-label="Filter by diet">
+            <option value="all">Any diet</option>
+            <option value="vegetarian">Vegetarian</option>
+            <option value="vegan">Vegan</option>
+            <option value="gluten-free">Gluten-free</option>
+          </select>
+        </label>
+        <label class="select-control time-control">
+          <span>Time</span>
+          <select id="time-filter" aria-label="Filter by maximum cooking time">
+            <option value="all">Any time</option>
+            <option value="30">Under 30 min</option>
+            <option value="60">Under 1 hour</option>
+            <option value="120">Under 2 hours</option>
+          </select>
+        </label>
+        <label class="select-control">
+          <span>Type</span>
+          <select id="kind-filter" aria-label="Filter by food or drink">
+            <option value="all">Food and drinks</option>
+            <option value="food">Food only</option>
+            <option value="drink">Drinks only</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="results-heading">
+        <p id="result-count" aria-live="polite" aria-atomic="true"></p>
+        <button type="button" id="clear-filters" class="text-button">Clear filters</button>
+      </div>
+      <div class="recipe-grid" id="recipe-grid"></div>
+      <div class="empty-state" id="empty-state" hidden>
+        <span class="empty-icon" aria-hidden="true">⌕</span>
+        <h3>No recipes on this pass</h3>
+        <p>Try a broader word, remove an ingredient or filter, or pick “Show all” to explore every meal.</p>
+        <button type="button" id="empty-clear" class="secondary-button">Show all recipes</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span class="footer-brand">Pantry Pick Ghana</span>
+    <span>Regional methods vary. Make each dish your own.</span>
+  </footer>
+
+  <dialog class="recipe-dialog" id="recipe-dialog" aria-labelledby="dialog-title">
+    <div class="dialog-scroll">
+      <div class="dialog-topbar">
+        <span class="dialog-kicker">A GHANAIAN RECIPE TO MAKE</span>
+        <button type="button" class="icon-button" id="dialog-close" aria-label="Close recipe details">×</button>
+      </div>
+      <div id="dialog-content"></div>
+      <p class="regional-note">Regional methods vary. Adjust seasoning and accompaniments to your taste.</p>
+    </div>
+  </dialog>
+</body>
+</html>
