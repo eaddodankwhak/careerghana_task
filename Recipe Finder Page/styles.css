@@ -164,9 +164,12 @@ h1, h2, h3 { font-family: "Bricolage Grotesque", "Segoe UI", sans-serif; }
 .recipe-card { min-width: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); transition: border-color .18s ease, box-shadow .18s ease; }
 .recipe-card:hover { border-color: #a8c5bd; box-shadow: 0 8px 20px rgb(15 61 58 / 7%); }
 .card-open { width: 100%; display: block; padding: 0; border: 0; color: inherit; text-align: left; background: transparent; }
-.card-art { position: relative; min-height: 126px; display: flex; align-items: center; justify-content: center; background: var(--teal-50); }
-.card-emoji { font-size: 54px; line-height: 1; }
+.card-art { position: relative; aspect-ratio: 3 / 2; overflow: hidden; border-radius: 6px 6px 0 0; background: var(--teal-50); }
+.recipe-photo-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.recipe-photo-image[hidden], .recipe-photo-fallback[hidden] { display: none; }
+.recipe-photo-fallback { position: absolute; inset: 0; display: grid; place-items: center; font-size: 54px; line-height: 1; }
 .card-save { position: absolute; top: 10px; right: 10px; width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 50%; color: var(--teal-950); background: var(--surface); font-size: 19px; line-height: 1; }
+.card-save { z-index: 1; }
 .card-save:hover { color: #8b6712; background: var(--saffron-soft); }
 .card-body { padding: 16px 16px 15px; }
 .card-meta { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 7px; color: var(--muted); font-size: 12px; font-weight: 600; }
@@ -193,8 +196,9 @@ h1, h2, h3 { font-family: "Bricolage Grotesque", "Segoe UI", sans-serif; }
 .dialog-topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 17px; }
 .dialog-kicker { color: var(--teal-800); font-size: 11px; font-weight: 700; letter-spacing: 1.1px; }
 .icon-button { width: 34px; height: 34px; display: grid; place-items: center; padding: 0; border: 1px solid var(--line); border-radius: 50%; color: var(--ink); background: var(--surface); font-size: 24px; line-height: 1; }
-.dialog-heading { display: flex; align-items: center; gap: 17px; margin-bottom: 12px; }
-.dialog-emoji { width: 76px; height: 76px; flex: 0 0 76px; display: grid; place-items: center; border-radius: 6px; background: var(--teal-50); font-size: 42px; }
+.dialog-photo-box { position: relative; height: 220px; overflow: hidden; margin-bottom: 16px; border-radius: 6px; background: var(--teal-50); }
+.dialog-photo-box .recipe-photo-fallback { font-size: 64px; }
+.dialog-heading { display: flex; align-items: center; margin-bottom: 12px; }
 .dialog-heading h2 { margin: 0; color: var(--teal-950); font-size: clamp(28px, 6vw, 38px); line-height: 1.04; }
 .dialog-meta { display: flex; flex-wrap: wrap; gap: 8px 16px; padding: 14px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); color: var(--muted); font-size: 14px; }
 .dialog-meta strong { color: var(--ink); }
@@ -237,8 +241,6 @@ h1, h2, h3 { font-family: "Bricolage Grotesque", "Segoe UI", sans-serif; }
   .select-control { min-width: 0; }
   .time-control { grid-column: 1 / -1; }
   .recipe-grid { gap: 11px; }
-  .card-art { min-height: 108px; }
-  .card-emoji { font-size: 45px; }
   .card-body { padding: 13px 12px; }
   .card-body h3 { font-size: 18px; }
   .card-detail-row { align-items: flex-start; flex-direction: column; gap: 4px; }
@@ -248,7 +250,6 @@ h1, h2, h3 { font-family: "Bricolage Grotesque", "Segoe UI", sans-serif; }
 @media (max-width: 380px) {
   .finder-topline { align-items: flex-start; flex-direction: column; gap: 14px; }
   .recipe-grid { grid-template-columns: 1fr; }
-  .card-art { min-height: 132px; }
 }
 
 @media (prefers-color-scheme: dark) {

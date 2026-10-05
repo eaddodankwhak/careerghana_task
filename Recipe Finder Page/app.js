@@ -126,6 +126,31 @@ function makeDietTags(diets) {
   return list;
 }
 
+function createRecipePhoto(recipe, containerClass) {
+  const container = document.createElement("div");
+  container.className = containerClass;
+
+  const image = document.createElement("img");
+  image.className = "recipe-photo-image";
+  image.src = recipe.img;
+  image.alt = `${recipe.name}, a Ghanaian ${recipe.kind} made with ${recipe.ingredients.slice(0, 3).join(", ")}`;
+  image.loading = "lazy";
+
+  const fallback = document.createElement("span");
+  fallback.className = "recipe-photo-fallback";
+  fallback.setAttribute("aria-hidden", "true");
+  fallback.textContent = recipe.emoji;
+  fallback.hidden = true;
+
+  image.addEventListener("error", () => {
+    image.hidden = true;
+    fallback.hidden = false;
+  }, { once: true });
+
+  container.append(image, fallback);
+  return container;
+}
+
 function createRecipeCard(recipe, matches) {
   const card = document.createElement("article");
   card.className = "recipe-card";
@@ -136,12 +161,7 @@ function createRecipeCard(recipe, matches) {
   openButton.setAttribute("aria-label", `View ${recipe.name} recipe`);
   openButton.addEventListener("click", () => openRecipe(recipe));
 
-  const art = document.createElement("div");
-  art.className = "card-art";
-  const emoji = document.createElement("span");
-  emoji.className = "card-emoji";
-  emoji.setAttribute("aria-hidden", "true");
-  emoji.textContent = recipe.emoji;
+  const art = createRecipePhoto(recipe, "card-art");
 
   const saveButton = document.createElement("button");
   saveButton.type = "button";
@@ -150,7 +170,7 @@ function createRecipeCard(recipe, matches) {
   saveButton.setAttribute("aria-label", `${savedRecipes.has(recipe.id) ? "Remove" : "Save"} ${recipe.name} ${savedRecipes.has(recipe.id) ? "from" : "to"} saved recipes`);
   saveButton.setAttribute("aria-pressed", String(savedRecipes.has(recipe.id)));
   saveButton.addEventListener("click", () => toggleSaved(recipe.id));
-  art.append(emoji, saveButton);
+  art.append(saveButton);
 
   const body = document.createElement("div");
   body.className = "card-body";
@@ -198,9 +218,10 @@ function appendTextElement(parent, tagName, className, text) {
 
 function openRecipe(recipe) {
   dialogContent.replaceChildren();
+  dialogContent.append(createRecipePhoto(recipe, "dialog-photo-box"));
+
   const heading = document.createElement("div");
   heading.className = "dialog-heading";
-  appendTextElement(heading, "span", "dialog-emoji", recipe.emoji).setAttribute("aria-hidden", "true");
   appendTextElement(heading, "h2", "", recipe.name).id = "dialog-title";
   dialogContent.append(heading);
 
