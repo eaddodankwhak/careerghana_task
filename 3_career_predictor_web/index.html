@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f4f7f4">
+    <title>Career Compass — Skills & Interests</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="model.js" defer></script>
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Career Compass home">
+        <span class="brand-mark" aria-hidden="true">↗</span>
+        <span>career<span class="brand-light">compass</span></span>
+      </a>
+      <span class="header-note">A little clarity, one question at a time</span>
+    </header>
+
+    <main class="page-shell">
+      <section class="intro">
+        <p class="eyebrow">SKILLS & INTERESTS</p>
+        <h1>Find a path that<br><span>feels like you.</span></h1>
+        <p class="intro-copy">
+          Rate ten statements from 1 to 5. There are no wrong answers —
+          just a starting point for exploring what you enjoy.
+        </p>
+      </section>
+
+      <section class="quiz-panel" aria-live="polite">
+        <p id="status" class="status" role="status">Loading your questions...</p>
+        <div id="quiz" hidden>
+          <div class="progress-header">
+            <span id="progress-label">Question 1 of 10</span>
+            <span class="progress-hint">1 = strongly disagree · 5 = strongly agree</span>
+          </div>
+          <div
+            id="progress-track"
+            class="progress-track"
+            role="progressbar"
+            aria-label="Quiz progress"
+            aria-valuemin="1"
+            aria-valuemax="10"
+            aria-valuenow="1"
+          >
+            <div id="progress-fill" class="progress-fill"></div>
+          </div>
+
+          <div class="question-area">
+            <p id="question-number" class="question-number"></p>
+            <h2 id="statement"></h2>
+            <div id="rating-scale" class="rating-scale" role="group" aria-label="Choose a rating"></div>
+            <div class="scale-labels" aria-hidden="true">
+              <span>Strongly disagree</span>
+              <span>Strongly agree</span>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button id="back-button" class="button button-back" type="button">← Back</button>
+            <button id="next-button" class="button button-next" type="button" disabled>
+              Next question →
+            </button>
+          </div>
+        </div>
+
+        <div id="results" class="results" hidden></div>
+      </section>
+
+      <p class="footnote">A learning project — not a formal career assessment.</p>
+    </main>
+  </body>
+</html>

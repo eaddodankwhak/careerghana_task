@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f4f7f4">
+    <title>Daily Career Coach</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="tips.js"></script>
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Daily Career Coach home">
+        <span class="brand-mark" aria-hidden="true">↗</span>
+        <span>career<span class="brand-light">coach</span></span>
+      </a>
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false">
+        Switch to dark mode
+      </button>
+    </header>
+
+    <main class="page-shell">
+      <section class="intro">
+        <p class="eyebrow">A LITTLE CLARITY, EVERY DAY</p>
+        <h1>Your daily<br><span>career coach.</span></h1>
+        <p class="intro-copy">
+          A small idea for your next step, wherever you are in your journey.
+        </p>
+      </section>
+
+      <section class="coach-panel" aria-labelledby="page-heading">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">TODAY'S NOTE</p>
+            <h2 id="page-heading">A thought to take with you</h2>
+          </div>
+          <time id="today-date"></time>
+        </div>
+
+        <div class="controls">
+          <label for="category-filter">Category</label>
+          <select id="category-filter">
+            <option value="All">All (mixed)</option>
+            <option value="Encouragement">Encouragement</option>
+            <option value="Practical Advice">Practical Advice</option>
+          </select>
+          <button id="mode-toggle" class="mode-toggle" type="button" aria-pressed="false">
+            Switch to random mode
+          </button>
+        </div>
+
+        <article id="tip-card" class="tip-card" aria-live="polite">
+          <div id="tip-content" class="tip-content">
+            <span id="tip-category" class="category-badge"></span>
+            <blockquote id="tip-text"></blockquote>
+            <p id="tip-author" class="tip-author" hidden></p>
+          </div>
+        </article>
+
+        <p id="tip-status" class="tip-status" role="status" aria-live="polite"></p>
+
+        <div class="actions">
+          <button id="new-tip" class="button button-primary" type="button">New Tip</button>
+          <div class="share-control">
+            <button
+              id="share-tip"
+              class="button button-secondary share-button"
+              type="button"
+              aria-label="Share Tip"
+              aria-haspopup="menu"
+              aria-expanded="false"
+              aria-controls="share-menu"
+            >
+              <svg class="share-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 15V3m0 0L7.5 7.5M12 3l4.5 4.5M5 12v7h14v-7"></path>
+              </svg>
+              <span>Share Tip</span>
+            </button>
+            <div id="share-menu" class="share-menu" role="menu" aria-label="Share options" hidden>
+              <a id="share-whatsapp" role="menuitem" href="#" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+              <a id="share-email" role="menuitem" href="#">Email</a>
+              <a id="share-x" role="menuitem" href="#" target="_blank" rel="noopener noreferrer">X</a>
+              <button id="share-copy" type="button" role="menuitem">Copy Text</button>
+            </div>
+          </div>
+        </div>
+        <p class="mode-note" id="mode-note"></p>
+      </section>
+    </main>
+  </body>
+</html>
